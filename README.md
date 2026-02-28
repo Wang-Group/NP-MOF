@@ -85,6 +85,17 @@ Optional packages for richer visualization:
 pip install seaborn plotly
 ```
 
+## Large Files
+
+Large and binary-like artifacts under `data/`, including CSV tables, notebooks, Excel workbooks, and generated figures, are stored with Git LFS. Text helper files such as `data/merge_mof_data.py` remain in normal Git.
+
+Before cloning, pulling, or checking out branches, make sure Git LFS is enabled locally:
+
+```bash
+git lfs install
+git lfs pull
+```
+
 ## Usage
 
 1. Launch Jupyter from the repository root.
@@ -112,7 +123,7 @@ python data/merge_mof_data.py --base ./data --output MOF_data.csv
 ## Notes
 
 - The three Excel files in `data/` that previously used Chinese filenames have been renamed to English, and notebook references have been updated accordingly.
-- `data/RACs.csv` and `data/geometric_properties.csv` are large files and are better kept on local storage rather than in frequently synced network folders.
+- `data/` contains Git LFS-managed artifacts; cloning or pulling without Git LFS will leave pointer files instead of the full datasets, notebooks, and figures.
 - Some notebook outputs are large, and rerunning notebooks may overwrite existing figures or result tables.
 
 ## Contact
