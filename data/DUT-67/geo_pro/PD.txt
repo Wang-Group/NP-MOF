@@ -1,0 +1,1 @@
+/home/jyb/workspace/mof_descriptor_calculator/data/DUT-67/geo_pro/PD.txt    17.13477 6.81117  17.13477

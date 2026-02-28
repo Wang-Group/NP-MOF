@@ -1,0 +1,12 @@
+Zr12-BPDC, Anchors list: {16, 4, 5, 15}, SBU connectlist: {1} set to be linker
+Zr12-BPDC, Anchors list: {0, 2, 13, 14}, SBU connectlist: {0} set to be linker
+Zr12-BPDC, Anchors list: {1, 2, 12, 13}, SBU connectlist: {0} set to be linker
+Zr12-BPDC, Anchors list: {0, 1, 12, 14}, SBU connectlist: {0} set to be linker
+Zr12-BPDC, Anchors list: {17, 3, 4, 15}, SBU connectlist: {1} set to be linker
+Zr12-BPDC, Anchors list: {16, 17, 3, 5}, SBU connectlist: {1} set to be linker
+Zr12-BPDC, Anchors list: {9, 11, 22, 23}, SBU connectlist: {0} set to be linker
+Zr12-BPDC, Anchors list: {9, 10, 21, 23}, SBU connectlist: {0} set to be linker
+Zr12-BPDC, Anchors list: {10, 11, 21, 22}, SBU connectlist: {0} set to be linker
+Zr12-BPDC, Anchors list: {8, 19, 20, 6}, SBU connectlist: {1} set to be linker
+Zr12-BPDC, Anchors list: {18, 20, 6, 7}, SBU connectlist: {1} set to be linker
+Zr12-BPDC, Anchors list: {8, 18, 19, 7}, SBU connectlist: {1} set to be linker

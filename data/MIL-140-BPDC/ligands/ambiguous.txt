@@ -1,0 +1,4 @@
+MIL-140-BPDC, Anchors list: {76, 77, 78, 79}, SBU connectlist: {0} set to be linker
+MIL-140-BPDC, Anchors list: {76, 77, 78, 79}, SBU connectlist: {0} set to be linker
+MIL-140-BPDC, Anchors list: {78, 79}, SBU connectlist: {0} set to be linker
+MIL-140-BPDC, Anchors list: {76, 77}, SBU connectlist: {0} set to be linker

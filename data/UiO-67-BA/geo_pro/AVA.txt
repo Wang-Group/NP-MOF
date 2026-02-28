@@ -1,0 +1,3 @@
+@ /home/jyb/workspace/mof_descriptor_calculator/data/UiO-67-BA/geo_pro/AVA.txt Unitcell_volume: 19505.3   Density: 0.704298   AV_A^3: 5609.72 AV_Volume_fraction: 0.2876 AV_cm^3/g: 0.40835 NAV_A^3: 0 NAV_Volume_fraction: 0 NAV_cm^3/g: 0
+Number_of_channels: 1 Channel_volume_A^3: 5609.72  
+Number_of_pockets: 0 Pocket_volume_A^3: 

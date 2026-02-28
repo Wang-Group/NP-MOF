@@ -1,0 +1,1 @@
+/home/jyb/workspace/mof_descriptor_calculator/data/UiO-66-F/geo_pro/PD.txt    7.74558 3.79716  7.56537

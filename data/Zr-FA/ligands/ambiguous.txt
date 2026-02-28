@@ -1,0 +1,4 @@
+Zr-FA, Anchors list: {75, 76}, SBU connectlist: {0} set to be linker
+Zr-FA, Anchors list: {74, 77}, SBU connectlist: {1} set to be linker
+Zr-FA, Anchors list: {73, 78}, SBU connectlist: {1} set to be linker
+Zr-FA, Anchors list: {72, 79}, SBU connectlist: {0} set to be linker

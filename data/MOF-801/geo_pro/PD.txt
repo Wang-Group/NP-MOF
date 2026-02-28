@@ -1,0 +1,1 @@
+/home/jyb/workspace/mof_descriptor_calculator/data/MOF-801/geo_pro/PD.txt    8.08771 3.48194  8.08771

@@ -1,0 +1,3 @@
+@ /home/jyb/workspace/mof_descriptor_calculator/data/MOF-808/geo_pro/AVA.txt Unitcell_volume: 43378.2   Density: 0.781234   AV_A^3: 21336.9 AV_Volume_fraction: 0.49188 AV_cm^3/g: 0.629619 NAV_A^3: 3.47026 NAV_Volume_fraction: 8e-05 NAV_cm^3/g: 0.000102402
+Number_of_channels: 1 Channel_volume_A^3: 21336.9  
+Number_of_pockets: 8 Pocket_volume_A^3: 0  0.867565  0.867565  0  0.867565  0.867565  0  0  
