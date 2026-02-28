@@ -1,42 +1,123 @@
-# NP_at_MOF
+# NP-MOF
 
-Machine-learning study and data release for the manuscript **"Machine Learning Reveals Metal-Support Interactions Governing Nanoparticle Localization in Metal-Organic Frameworks"**. The repo bundles the curated experimental dataset (10 transition metals on 11 (trian) + 2 (test) Zr-based MOFs synthesized via the double-solvent method), literature survey, descriptor tables, structural files, and the notebooks used to build and visualize the classification models that predict whether nanoparticles form inside or outside MOF pores.
+## Overview
 
-## Repository layout
-- `data/` - Core datasets and descriptor tables (RACs, geometric features from Zeo++, 45-factor MOF representations, experimental labels in `all_NPs.xlsx`, literature set in `literature_data.xlsx`) plus per-MOF subfolders with `*.cif`, `*_descriptors.csv`, and Zeo++ outputs. Also includes factor-contribution breakdowns (`full_contrib_factor19.csv`, `full_contrib_factor37.csv`, `full_contrib_factor39.csv`) and the merged feature matrix `MOF_data.csv`/`MOF_factors.csv`. Large raw descriptor dumps live here (`RACs.csv`, `geometric_properties.csv`).
-- `cifs/` - Lightweight copy of the CIF structures for the studied MOFs (UiO-66 variants, DUT-51/67, MOF-801/808, MIL-140, PCN-700, Zr-FA, Zr12-BPDC).
-- `0-over_fitting_with_linear_model/` - Main analysis notebooks and derived figures for feature selection, linear separability checks, and MLP classification (e.g., `0-feature_selection.ipynb`, `0-if_linear_separatable.ipynb`, `1-feature_selection.ipynb`). Results tables for metal-descriptor combinations sit in `results_core_combos/`; visualization outputs are saved as `*.png`.
-- `1-literature_data/` - Literature-survey notebooks (`v1.ipynb`, `v2.ipynb`) and summary plots/Sankey diagram quantifying inside vs outside nanoparticle formation across 167 reported cases.
-- `0-old/` - Archived intermediate data and legacy notebooks/plots kept for reference; not used in the final figures.
+This repository contains the data, visualizations, and machine-learning analyses used in the study **Predicting Internal versus External Nanoparticle Formation in Zr-Based Metal–Organic Frameworks**.
 
-## Key files and what they contain
-- `data/all_NPs.xlsx` - Experimental labels for the 10-by-13 metal/MOF grid (inside vs outside nanoparticle localization) measured by electron microscopy.
-- `data/MOF_data.csv` - Merged RAC and geometric descriptors for each MOF (one row per MOF; produced with `data/merge_mof_data.py`).
-- `data/MOF_factors.csv` - 45-factor low-dimensional representation from prior factor analysis over ~470k MOFs; these factors are the MOF-side features used in modeling.
-- `data/full_contrib_factor19.csv`, `data/full_contrib_factor37.csv`, `data/full_contrib_factor39.csv` and `data/uio_factor*/` - Factor contribution analyses mapping factors back to chemically interpretable RAC/Zeo++ descriptors.
-- `data/literature_data.xlsx` - Collated literature cases used for Figure 1 (inside/outside counts by synthesis route, metal, and MOF).
-- `data/merge_mof_data.py` - Utility to stack per-MOF descriptor CSVs and Zeo++ outputs into a single table. Usage: `python data/merge_mof_data.py --base ./data --output MOF_data.csv` (defaults match repo layout). Requires `pandas`.
-- `0-over_fitting_with_linear_model/NPs.xlsx` - Metal descriptor table (binding energy and diffusion barrier on graphene, QMO, noble indicator) used as the metal-side features.
+It includes curated experimental data, MOF structures and descriptors, literature-analysis outputs, and Jupyter notebooks for feature selection and classification modeling.
 
-## How to reproduce the analyses
-1. Set up Python (tested with Python 3.10+). Install: `pip install pandas numpy scikit-learn matplotlib jupyter openpyxl` (add `seaborn` or `plotly` if you want extra styling).
-2. Launch notebooks with `jupyter notebook` from the repo root. Recommended order:
-   - `0-over_fitting_with_linear_model/0-feature_selection.ipynb` - Baseline feature selection and model comparison (logistic regression, random forest, gradient boosting, MLP).
-   - `0-over_fitting_with_linear_model/0-if_linear_separatable.ipynb` - Linear separability check and justification for using a small MLP (hidden layers (10, 4) with tanh).
-   - `0-over_fitting_with_linear_model/1-feature_selection.ipynb` - Exhaustive metal+MOF descriptor combinations and cross-validation; produces the accuracy/feature-importance figures.
-   - `0-over_fitting_with_linear_model/additional_visualization/1-visualize_selected_features.ipynb` - Generates the phase-boundary plots and noble/non-noble panels.
-   - `1-literature_data/v2.ipynb` - Rebuilds the literature Sankey and bar plots (Figure 1).
-3. Intermediate/derived outputs are written alongside each notebook as CSV/PNG; rerunning a notebook regenerates its artifacts.
+## Repository Layout
 
-## Study highlights (context for the notebooks)
-- Combining four metal migration descriptors (binding energy and diffusion barrier on graphene, affinity to O atoms QMO, noble indicator) with 45 low-dimensional MOF factors yields an interpretable classifier for nanoparticle localization (inside vs outside).
-- Metal descriptors alone cap performance (~0.87 balanced accuracy) because they cannot distinguish different MOFs for a given metal; adding MOF factors (notably Factors 19, 37, 39) resolves MOF-specific behavior.
-- A compact three-descriptor view captures the mechanism: weak metal affinity to C/O drives external deposition; stronger metal-support interactions and linker heteroatom character (Factor 37) steer nanoparticles into pores. External validation on UiO-66-F/I achieves ~85% accuracy.
+- `data/`
+  Core data directory containing experimental labels, MOF descriptors, low-dimensional factors, literature data, factor-contribution analyses, and per-MOF raw subfolders.
 
-## Notes on data size and provenance
-- Some descriptor files are large (`data/RACs.csv` ~0.8 GB, `data/geometric_properties.csv` ~110 MB). Keep them on local storage; cloud-synced folders may throttle performance.
-- MOF structures in `cifs/` mirror those in `data/<MOF>/` and can be used to recompute descriptors if needed.
+- `cifs/`
+  Curated CIF structure files.
 
-## Citation and contact
-If you use these data or notebooks, please cite the manuscript (authors: Zhaomin Su, Lingzhen Zeng, Yibin Jiang*, Cheng Wang*; iChem, Xiamen University).
-Corresponding authors: `yibin_jiang@outlook.com`, `wangchengxmu@xmu.edu.cn`.
+- `1-over_fitting_with_linear_model/`
+  Main modeling notebooks and figure outputs, including feature selection, linear separability checks, descriptor-combination comparisons, and extra visualizations.
+
+- `0-complete_literature_data/`
+  Literature-data curation and statistical-visualization notebooks, together with exported figures, HTML, and Excel outputs.
+
+## Key Files
+
+- `data/all_NPs.xlsx`
+  Experimental label table describing whether nanoparticles are located inside MOF pores or on the external surface for each metal-MOF pair.
+
+- `data/MOF_data.csv`
+  Merged MOF descriptor table generated from per-MOF CSV files and `geo_pro/data.csv`.
+
+- `data/MOF_factor.csv`
+  The main 45-dimensional MOF factor table used as MOF-side model input.
+
+- `data/MOF_factors.csv`
+  A backup copy with the same content as `MOF_factor.csv`.
+
+- `data/literature_data.xlsx`
+  Curated literature dataset used for summary statistics and Sankey-style analyses.
+
+- `data/single_metal_atoms_on_graphene_binding_energy_and_diffusion_barrier.xlsx`
+  Binding-energy and diffusion-barrier table for metals on graphene.
+
+- `data/supported_metal_M_oxygen_affinity_QMO_and_support_metal_affinity_QMM_prime.xlsx`
+  Table containing metal-oxygen affinity `QMO` and metal-support affinity `QMM'`.
+
+- `data/supported_metal_M_support_metal_affinity_QMM_prime.xlsx`
+  Table containing metal-support affinity `QMM'`.
+
+- `data/merge_mof_data.py`
+  Script for traversing MOF subfolders under `data/` and merging descriptor tables.
+
+- `1-over_fitting_with_linear_model/NPs.xlsx`
+  Curated experimental sheet used by the modeling notebooks.
+
+## Main Notebooks
+
+- `1-over_fitting_with_linear_model/0-feature_selection.ipynb`
+  Baseline feature selection, model comparison, and performance evaluation.
+
+- `1-over_fitting_with_linear_model/0-if_linear_separatable.ipynb`
+  Checks whether the task is approximately linearly separable and compares against more flexible models.
+
+- `1-over_fitting_with_linear_model/1-feature_selection.ipynb`
+  Systematically enumerates metal + MOF feature combinations and generates result tables and figures.
+
+- `1-over_fitting_with_linear_model/additional_visualization/1-visualize_selected_features.ipynb`
+  Provides additional visualization for selected key features.
+
+- `0-complete_literature_data/visualize.ipynb`
+  Performs grouped literature statistics, summary-table export, and Sankey visualization.
+
+## Environment
+
+Python 3.10+ is recommended.
+
+Common dependencies:
+
+```bash
+pip install pandas numpy scikit-learn matplotlib jupyter openpyxl
+```
+
+Optional packages for richer visualization:
+
+```bash
+pip install seaborn plotly
+```
+
+## Usage
+
+1. Launch Jupyter from the repository root.
+
+```bash
+jupyter notebook
+```
+
+2. Recommended order for browsing and reproducing the analyses.
+
+```text
+1-over_fitting_with_linear_model/0-feature_selection.ipynb
+1-over_fitting_with_linear_model/0-if_linear_separatable.ipynb
+1-over_fitting_with_linear_model/1-feature_selection.ipynb
+1-over_fitting_with_linear_model/additional_visualization/1-visualize_selected_features.ipynb
+0-complete_literature_data/visualize.ipynb
+```
+
+3. To rebuild the merged MOF descriptor table, run:
+
+```bash
+python data/merge_mof_data.py --base ./data --output MOF_data.csv
+```
+
+## Notes
+
+- The three Excel files in `data/` that previously used Chinese filenames have been renamed to English, and notebook references have been updated accordingly.
+- `data/RACs.csv` and `data/geometric_properties.csv` are large files and are better kept on local storage rather than in frequently synced network folders.
+- Some notebook outputs are large, and rerunning notebooks may overwrite existing figures or result tables.
+
+## Contact
+
+For citation or research communication, please refer to the paper authors or contact:
+
+- `yibin_jiang@outlook.com`
+- `wangchengxmu@xmu.edu.cn`
